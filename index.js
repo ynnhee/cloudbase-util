@@ -3,6 +3,7 @@ const compareVersion = require('./libs/compare_version.js');
 const bytesToSize = require('./libs/byte_to_size.js');
 const convertTime = require('./libs/convert_time.js');
 const _ = require('lodash');
+const path = require('path');
 const moment = require('moment-timezone');
 const env = {
   image: process.env.YNNHEE_FUNC_CDN_IMAGE,
@@ -21,6 +22,10 @@ module.exports = {
   bytesToSize: bytesToSize,
   convertTime: convertTime,
   getImageUrl: function (fid) {
+    let ext = path.extname(fid);
+    if (ext === '.gif' || ext === '.GIF') {
+      return `${env.image_prefix}${fid}`
+    }
     return format(env.image, { fid: fid })
   },
   getVideoUrl: function (fid) {
