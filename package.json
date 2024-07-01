@@ -12,6 +12,10 @@
   ],
   "author": "catcto",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ynnhee/cloudbase-util.git"
+  },
   "dependencies": {
     "lodash": "^4.17.21",
     "moment-timezone": "^0.5.45"
