@@ -1,6 +1,6 @@
 {
   "name": "@ynnhee/cloudbase-util",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Wechat Cloudbase Util",
   "main": "index.js",
   "scripts": {
