@@ -12,4 +12,12 @@ module.exports = {
   format: format,
   bytesToSize: bytesToSize,
   convertTime: convertTime,
+  env: {
+    image: process.env.YNNHEE_FUNC_CDN_IMAGE,
+    video: process.env.YNNHEE_FUNC_CDN_VIDEO,
+    audio: process.env.YNNHEE_FUNC_CDN_AUDIO,
+    image_prefix: process.env.YNNHEE_FUNC_CDN_IMAGE_PREFIX,
+    video_prefix: process.env.YNNHEE_FUNC_CDN_IMAGE_PREFIX,
+    audio_prefix: process.env.YNNHEE_FUNC_CDN_IMAGE_PREFIX,
+  }
 };
