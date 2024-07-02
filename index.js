@@ -38,6 +38,7 @@ module.exports = {
         return format(env.avatar, { fid: path })
       });
     }
+    return user_info
   },
   env: env
 };
