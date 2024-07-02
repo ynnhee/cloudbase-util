@@ -35,7 +35,7 @@ module.exports = {
     if(user_info && _.isString(user_info.avatarUrl) && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')){
       const regex = /(https?:\/\/[^\/\s]+)(?:\/([^\?\s]*))?(\?.*)?/g;
       user_info.avatarUrl = user_info.avatarUrl.replace(regex, (match, protocolAndDomain, path, query) => {
-        return utils.string.format(env.avatar, { fid: path })
+        return format(env.avatar, { fid: path })
       });
     }
   },
