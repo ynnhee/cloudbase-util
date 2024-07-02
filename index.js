@@ -32,7 +32,7 @@ module.exports = {
     return format(env.audio, { fid: fid })
   },
   resetAvatarUrl: function(user_info){
-    if(user_info && user_info.avatarUrl && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')){
+    if(user_info && _.isString(user_info.avatarUrl) && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')){
       const regex = /(https?:\/\/[^\/\s]+)(?:\/([^\?\s]*))?(\?.*)?/g;
       user_info.avatarUrl = user_info.avatarUrl.replace(regex, (match, protocolAndDomain, path, query) => {
         return utils.string.format(env.avatar, { fid: path })
