@@ -3,6 +3,7 @@ const compareVersion = require('./libs/compare_version.js');
 const bytesToSize = require('./libs/byte_to_size.js');
 const convertTime = require('./libs/convert_time.js');
 const _ = require('lodash');
+const crypto = require('crypto');
 const moment = require('moment-timezone');
 const env = {
   image: process.env.YNNHEE_FUNC_CDN_IMAGE,
@@ -31,14 +32,28 @@ module.exports = {
   getAudioUrl: function (fid) {
     return format(env.audio, { fid: fid })
   },
-  resetAvatarUrl: function(user_info){
-    if(user_info && _.isString(user_info.avatarUrl) && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')){
+  resetAvatarUrl: function (user_info) {
+    if (user_info && _.isString(user_info.avatarUrl) && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')) {
       const regex = /(https?:\/\/[^\/\s]+)(?:\/([^\?\s]*))?(\?.*)?/g;
       user_info.avatarUrl = user_info.avatarUrl.replace(regex, (match, protocolAndDomain, path, query) => {
         return format(env.avatar, { fid: path })
       });
     }
     return user_info
+  },
+  getEncrypt: function (data, secretKey) {
+    let encry = '';
+    try {
+      const algorithm = 'aes-256-cbc';
+      const iv = crypto.randomBytes(16);
+      let cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+      let encrypted = cipher.update(data);
+      encrypted = Buffer.concat([encrypted, cipher.final()]);
+      encry = Buffer.concat([iv, encrypted]).toString('base64');
+    } catch (err) {
+      console.error('cloudbase-util.getEncrypt', err)
+    }
+    return encry;
   },
   env: env
 };
