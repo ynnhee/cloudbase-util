@@ -69,5 +69,12 @@ module.exports = {
     }
     return false
   },
+  isIdCard: function (idcard) {
+    let reg = /(^\d{15}$)|(^\d{17}([0-9]|X|x)$)/;
+    if (_.isString(idcard) && reg.test(idcard)) {
+      return true
+    }
+    return false
+  },
   env: env
 };
