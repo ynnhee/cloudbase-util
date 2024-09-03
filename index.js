@@ -55,5 +55,19 @@ module.exports = {
     }
     return encry;
   },
+  isMobilePhone: function (phone) {
+    let reg = /^((\+|00)86)?(1[3-9]|9[28])\d{9}$/;
+    if (_.isString(phone) && reg.test(phone)) {
+      return true
+    }
+    return false
+  },
+  isEmail: function (email) {
+    let reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    if (_.isString(email) && reg.test(email)) {
+      return true
+    }
+    return false
+  },
   env: env
 };
