@@ -12,6 +12,7 @@ const env = {
   avatar: process.env.YNNHEE_FUNC_CDN_AVATAR,
   docs: process.env.YNNHEE_FUNC_CDN_DOCS,
   zips: process.env.YNNHEE_FUNC_CDN_ZIPS,
+  sign_key: process.env.YNNHEE_FUNC_CDN_SIGN_KEY,
   image_prefix: process.env.YNNHEE_FUNC_CDN_IMAGE_PREFIX,
   avatar_prefix: process.env.YNNHEE_FUNC_CDN_AVATAR_PREFIX,
   video_prefix: process.env.YNNHEE_FUNC_CDN_VIDEO_PREFIX,
@@ -39,8 +40,14 @@ module.exports = {
   getDocsUrl: function (fid) {
     return format(env.docs, { fid: fid })
   },
-  getZipsUrl: function (fid) {
-    return format(env.zips, { fid: fid })
+  getZipsUrl: function (fid, params) {
+    let fm = { fid: fid };
+    if(params && params.sign && env.sign_key){
+      let t = Math.floor(Date.now() / 1000).toString(16);
+      let s = `${env.sign_key}/${fid}${t}`
+      fm.sign = `?s=${crypto.createHash('md5').update(s).digest('hex')}&t=${t}`
+    }
+    return format(env.zips, fm)
   },
   resetAvatarUrl: function (user_info) {
     if (user_info && _.isString(user_info.avatarUrl) && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')) {
