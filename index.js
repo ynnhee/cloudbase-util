@@ -11,11 +11,13 @@ const env = {
   audio: process.env.YNNHEE_FUNC_CDN_AUDIO,
   avatar: process.env.YNNHEE_FUNC_CDN_AVATAR,
   docs: process.env.YNNHEE_FUNC_CDN_DOCS,
+  zips: process.env.YNNHEE_FUNC_CDN_ZIPS,
   image_prefix: process.env.YNNHEE_FUNC_CDN_IMAGE_PREFIX,
   avatar_prefix: process.env.YNNHEE_FUNC_CDN_AVATAR_PREFIX,
   video_prefix: process.env.YNNHEE_FUNC_CDN_VIDEO_PREFIX,
   audio_prefix: process.env.YNNHEE_FUNC_CDN_AUDIO_PREFIX,
   docs_prefix: process.env.YNNHEE_FUNC_CDN_DOCS_PREFIX,
+  zips_prefix: process.env.YNNHEE_FUNC_CDN_ZIPS_PREFIX,
 }
 
 module.exports = {
@@ -36,6 +38,9 @@ module.exports = {
   },
   getDocsUrl: function (fid) {
     return format(env.docs, { fid: fid })
+  },
+  getZipsUrl: function (fid) {
+    return format(env.zips, { fid: fid })
   },
   resetAvatarUrl: function (user_info) {
     if (user_info && _.isString(user_info.avatarUrl) && user_info.avatarUrl.includes('/miniprogram/') && user_info.avatarUrl.includes('/avatar/')) {
