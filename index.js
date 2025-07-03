@@ -41,7 +41,7 @@ module.exports = {
     return format(env.docs, { fid: fid })
   },
   getZipsUrl: function (fid, params) {
-    let fm = { fid: fid };
+    let fm = { fid: fid, sign: '' };
     if(params && params.sign && env.sign_key){
       let t = Math.floor(Date.now() / 1000).toString(16);
       let s = `${env.sign_key}/${fid}${t}`
