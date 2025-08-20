@@ -72,6 +72,19 @@ module.exports = {
     }
     return encry;
   },
+  formatFileName: function(name, replacement){
+    let rep = '_';
+    if (replacement) {
+      rep = replacement;
+    }
+    if (name) {
+      name = name.replace(/[\s`~!@#\$%\^\&\*\(\)_=\+<>\?:"\{\},\.\\\/;'\[\]\|\，\：\。\、]+/g, rep)
+      if (name.length > 1) {
+        name = name.replace(/(^_*)|(_*$)/g, '');
+      }
+    }
+    return (name || rep)
+  },
   isMobilePhone: function (phone) {
     let reg = /^((\+|00)86)?(1[3-9]|9[28])\d{9}$/;
     if (_.isString(phone) && reg.test(phone)) {
